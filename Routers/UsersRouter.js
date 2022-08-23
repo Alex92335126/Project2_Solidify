@@ -15,24 +15,16 @@ class UsersRouter {
   
     //GET Method  
 
-    get(req, res) {
-      let user = req.auth.user;
-      console.log("user list")
-      return (
-        this.usersService
-          .list()
-          .then((user) => {
-            res.json(user);
-          })
-          .catch((err) => {
-            res.status(500).json(err);
-          })
-      );
-    }
-  
-    getUserNotes(req, res) {
-      console.log('userid', req.body)
-  
+    async get(req, res) {
+      // let user = req.auth.user;
+      // console.log("listUser", user)
+      try {
+        const listuser = await this.usersService.list()
+        res.json(listuser); 
+      } catch (error) {
+        console.log(error)
+        res.status(500).send(error)
+      }
     }
 
     //post method
@@ -56,19 +48,12 @@ class UsersRouter {
     }
 
     //delete method
-    delete(req, res) {
+    async delete(req, res) {
       let id = req.params.id;
       let user = req.auth.user;
-      return (
-        this.usersService
-          .remove(id, user)
-          .then(() => {
-           res.json("delete success");
-          })
-          .catch((err) => {
-            res.status(500).json(err);
-          })
-      );
+      const removeUser = this.usersService.remove(id, user)
+      console.log (id, user)
+      res.json(removeUser); 
     }
   }
   

@@ -6,30 +6,38 @@ class EventsRouters {
 
     router() {
       let router = this.express.Router();
-      router.get("/", this.get.bind(this));
+      router.get("/", this.getAll.bind(this));
+      router.get("/:id", this.getByUser.bind(this))
       router.post("/", this.post.bind(this));
       router.put("/:id", this.put.bind(this));
       router.delete("/:id", this.delete.bind(this));
       return router;
     }
   
-    get(req, res) {
-      let user = req.auth.user;
-      console.log("auth user", user); 
-      return (
-        this.eventsService
-          .list(user)
-          .then((events) => {
-            res.json(events);
-          })
-          .catch((err) => {
-            res.status(500).json(err);
-          })
-      );
+    async getAll(req, res) {
+      // ==== auth checking =====
+      // let user = req.auth.user;
+      // console.log("auth user", user); 
+      try {
+        const allEvents = await this.eventsService.list()
+        res.json(allEvents)
+      } catch (error) {
+        res.status(500).send(error)
+      }
+      // return (
+      //   this.eventsService
+      //     .list(user)
+      //     .then((events) => {
+      //       res.json(events);
+      //     })
+      //     .catch((err) => {
+      //       res.status(500).json(err);
+      //     })
+      // );
     }
-    getUserEvents(req, res) {
-      console.log('userid', req.body)
-  
+    getByUser(req, res) {
+      let userId = req.params.id
+
     }
   
     /** # Post Method   #
