@@ -3,39 +3,42 @@ class EventService {
       this.knex = knex;
     }
   
+//list all events 
     async list() {
       console.log("listevent");
        
       const event = await this.knex("event")
         .select("*")
       
-      console.log('note service note', event)
+      console.log('events service', event)
       return event
     }
 
-    async listbyUser(userId) {
-      console.log("listuserevent");
+//list out all users from an event 
+    async listEventParticipant(eventId) {
+      console.log("eventID", eventId);
        
       const event = await this.knex("event")
-        .select("notes.content", "notes.id")
-        .join("notes", "users.id", "notes.user_id")
-        .where("username", user);
+        .select(event.creator)
+        .where()
       
-      console.log('note service note', notes)
-      return notes
+      console.log('firstName service', userId)
+      return user
+    }
+// list out all events from an user
+    async UserEvent(userId) {
+      console.log("userId", userId);
+  
     }
   
-    // async add(event, user) {
-    //   // console.log("add_event", event, user)
-    //    const event = await this.knex("users")
-    //     .select("id")
-    //     .where("username", user)
-    //     .first()
-    //     .then((data) => {
-    //       //{id: 1}
-    //       return this.knex("notes").insert({ user_id: data.id, content: note });
-    //     });
-    // }
+    async addEvent(event, user) {
+      // console.log("add_event", event, user)
+       const addedEvent = await this.knex("event")
+       
+          //{id: 1}
+          return this.knex("event").insert({ user_id: data.id, content: note });
+  
+    }
   
     // update(id, note) {
     //   return this.knex("notes").update({ content: note }).where({ id });
