@@ -6,9 +6,9 @@ class EventsRouters {
 
     router() {
       let router = this.express.Router();
-      router.get("/", this.getAll.bind(this));
+      // router.get("/", this.getAll.bind(this));
       router.get("/:id", this.getByUser.bind(this))
-      router.post("/", this.post.bind(this));
+      // router.post("/", this.post.bind(this));
       router.put("/:id", this.put.bind(this));
       router.delete("/:id", this.delete.bind(this));
       return router;
