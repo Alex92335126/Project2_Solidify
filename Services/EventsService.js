@@ -33,7 +33,7 @@ class EventService {
   
     async addEvent(event, user) {
       // console.log("add_event", event, user)
-       const event = await this.knex("event")
+       const addedEvent = await this.knex("event")
        
           //{id: 1}
           return this.knex("event").insert({ user_id: data.id, content: note });

@@ -7,9 +7,9 @@ class EventsRouters {
     router() {
       let router = this.express.Router();
       router.get("/", this.getAll.bind(this));
-      router.get("/:id", this.getEventParticipant.bind(this))
-      router.get("/:id", this.getUserEvent.bind(this))
+      router.get("/userEvent", this.getUserEvent.bind(this))
       router.post("/", this.postEvent.bind(this));
+      router.get("/:id", this.getEventParticipant.bind(this))
       router.put("/:id", this.put.bind(this));
       router.delete("/:id", this.delete.bind(this));
       return router;
@@ -40,8 +40,9 @@ class EventsRouters {
     }
 // list out all events from an user
     async getUserEvent(req, res) {
-      let userId = req.params.id
-      console.log(userId)
+      console.log('hi from user event')
+      let user = req.user
+      console.log('userId', user.id)
       try {
         const allUsers = await this.eventsService.listAllUser(userId)
         res.json(allUsers)
@@ -74,26 +75,26 @@ class EventsRouters {
       }
     }
   
-    // put(req, res) {
-    //   let id = req.params.id;
-    //   let note = req.body.note;
-    //   let user = req.auth.user;
-    //   console.log("id", id);
-    //   return (
-    //     this.eventsService
-    //       .update(id, note, user)
-    //       .then(() => {
-    //         return this.noteService.list(user);
-    //       })
-    //       .then((events) => {
+    put(req, res) {
+      // let id = req.params.id;
+      // let note = req.body.note;
+      // let user = req.auth.user;
+      // console.log("id", id);
+      // return (
+      //   this.eventsService
+      //     .update(id, note, user)
+      //     .then(() => {
+      //       return this.noteService.list(user);
+      //     })
+      //     .then((events) => {
   
-    //         res.json(events);
-    //       })
-    //       .catch((err) => {
-    //         res.status(500).json(err);
-    //       })
-    //   );
-    // }
+      //       res.json(events);
+      //     })
+      //     .catch((err) => {
+      //       res.status(500).json(err);
+      //     })
+      // );
+    }
   
     delete(req, res) {
       let id = req.params.id;

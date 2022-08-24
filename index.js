@@ -22,6 +22,7 @@ const port = 3000;
 
 const setupPassport = require("./passport");
 const AuthRouter = require("./Routers/passport-router");
+const isLoggedIn = require('./middleware/isLoggedIn')
 
 const app = express();
 app.use(cors());
@@ -32,7 +33,6 @@ app.use(express.static("public"));
 app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
 app.use(flash());
-// app.use(flash());
 
 app.use(
     session({
@@ -49,7 +49,7 @@ const userService = new UsersService(knex);
 app.use("/user", new UsersRouter(userService, express).router());
 
 const eventService = new EventService(knex);
-app.use("/event", new EventsRouter(eventService, express).router());
+app.use("/event", isLoggedIn.isLoggedIn, new EventsRouter(eventService, express).router());
 
 // https.createServer(options, app).listen(port, () => {
 //     console.log(`Listening on port ${port}`);
