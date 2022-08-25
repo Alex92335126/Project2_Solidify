@@ -1,0 +1,8 @@
+.border-nav{
+    border-width: 5px;
+}
+
+.bg-success {
+    --bs-bg-opacity: 5;
+    background-color: rgba(var(--bs-success-rgb), var(--bs-bg-opacity)) !important;
+  }
