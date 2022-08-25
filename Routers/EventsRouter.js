@@ -10,7 +10,8 @@ class EventsRouters {
     router.post("/", this.addEvent.bind(this));
     router.put("/", this.putEvent.bind(this));
     router.delete("/", this.deleteEvent.bind(this));
-    router.get("/userEvent", this.getUserEvent.bind(this));
+    router.post("/add-participant", this.addEventParticipant.bind(this));
+    router.delete("/del-participant", this.removeEventParticipant.bind(this));
     router.get("/:id", this.getEventParticipant.bind(this));
     return router;
   }
@@ -76,15 +77,33 @@ class EventsRouters {
     }
   }
 
+// Add user to a event (Join button)
+
+  async addEventParticipant (req, res) { 
+    let user = req.user;
+    try{
+      const addParticipant = await this.eventsService.addParticipant(user.id, req.body.eventId);
+      res.json(addParticipant);
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  }
+
+  // if user joined an event and remove user to a event (Decline button)
+  async removeEventParticipant (req, res) { 
+    let user = req.user;
+    try{
+      const delParticipant = await this.eventsService.delParticipant(user.id, req.body.eventId);
+      res.json(delParticipant);
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  }
 
   //list out all users from an event
   async getEventParticipant(req, res) {
-    let eventId = req.params.id;
-    console.log(eventId);
     try {
-      const eventParticipant = await this.eventsService.listEventParticipant(
-        eventId
-      );
+      const eventParticipant = await this.eventsService.listEventParticipant(eventId);
       res.json(eventParticipant);
     } catch (error) {
       res.status(500).send(error);
@@ -96,38 +115,11 @@ class EventsRouters {
     let user = req.user;
     console.log("userId", user.id);
     try {
-      const allUsers = await this.eventsService.listAllUser(userId);
+      const allUsers = await this.eventsService.listAllUser(userId, eventId);
       res.json(allUsers);
     } catch (error) {
       res.status(500).send(error);
     }
-  }
-
-  // return (
-  //   this.eventsService
-  //     .list(user)
-  //     .then((events) => {
-  //       res.json(events);
-  //     })
-  //     .catch((err) => {
-  //       res.status(500).json(err);
-  //     })
-  // );
-
-  delete(req, res) {
-    let id = req.params.id;
-    let user = req.auth.user;
-    return this.eventsService
-      .remove(id, user)
-      .then(() => {
-        return this.noteService.list(user);
-      })
-      .then((events) => {
-        res.json(events);
-      })
-      .catch((err) => {
-        res.status(500).json(err);
-      });
   }
 }
 

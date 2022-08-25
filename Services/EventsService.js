@@ -66,19 +66,37 @@ class EventService {
     return await this.knex("event").del().where({id: eventId}); 
   }
 
-  //list out all users from an event
-  async listEventParticipant(eventId) {
-    console.log("eventID", eventId);
-
-    const event = await this.knex("event").select(event.creator).where();
-
-    console.log("firstName service", userId);
-    return user;
-  }
-  // list out all events from an user
-  async UserEvent(userId) {
+// Add user to a event (Join button)
+  async addParticipant(userId, eventId) {
     console.log("userId", userId);
+    return await this.knex("event_participant")
+    .insert({
+      user_id: userId,
+      event_id: eventId
+    })
   }
+// if user joined an event and remove user to a event (Decline button)
+  async delParticipant(userId, eventId) {
+    console.log("userId", userId);
+   return await this.knex("event_participant")
+    .del()
+    .where({
+      user_id: userId,
+      event_id: eventId
+    })
+}
+
+//list out all users from an event
+    async listEventParticipant(userId, eventId) {
+      console.log("eventID", eventId);
+  
+      return await this.knex("event_participant")
+      .select({
+        user_id: userId,
+        event_id: eventId
+      })
+    }
+
 
   // update(id, note) {
   //   return this.knex("notes").update({ content: note }).where({ id });
