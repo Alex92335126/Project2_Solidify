@@ -14,6 +14,29 @@ class EventService {
       return event
     }
 
+    async addEvent(
+      eventName, 
+      eventStart, 
+      description, 
+      creator,
+      createdDate,
+      modifiedDate,
+      eventType
+      ) {
+          return this.knex("event").insert(
+            { 
+              event_name: eventName,
+              event_start: eventStart,
+              description,
+              creator,
+              created_date: createdDate,
+              modified_date: modifiedDate,
+              event_type: eventType,
+              is_active: 'true'
+            }
+          );
+    }
+
 //list out all users from an event 
     async listEventParticipant(eventId) {
       console.log("eventID", eventId);
@@ -31,14 +54,7 @@ class EventService {
   
     }
   
-    async addEvent(event, user) {
-      // console.log("add_event", event, user)
-       const addedEvent = await this.knex("event")
-       
-          //{id: 1}
-          return this.knex("event").insert({ user_id: data.id, content: note });
-  
-    }
+
   
     // update(id, note) {
     //   return this.knex("notes").update({ content: note }).where({ id });
