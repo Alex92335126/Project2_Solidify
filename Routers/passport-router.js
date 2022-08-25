@@ -20,10 +20,17 @@ class AuthRouter {
     res.redirect("/");
   }
 
+  isAdmin(req,res,next){ //trying to check if the user is admin
+    if(req.isAuthenticated() && (req.user.is_admin === 1)){
+      return next();
+    }
+    res.redirect("/admin")
+  }
+
   router() {
     let router = this.express.Router();
 
-    router.get("/", this.isLogged, (req, res) => {
+    router.get("/", (req, res) => {
       res.render("home", {
         title: "Home Page",
       });
