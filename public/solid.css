@@ -6,3 +6,9 @@
     --bs-bg-opacity: 5;
     background-color: rgba(var(--bs-success-rgb), var(--bs-bg-opacity)) !important;
   }
+.image-col{
+    background-image: url("/public/images/background.webp");
+    background-color: dimgray;
+}
+
+
