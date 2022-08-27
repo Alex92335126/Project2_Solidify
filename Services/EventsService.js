@@ -86,15 +86,18 @@ class EventService {
     })
 }
 
+async getParticipant(eventId) {
+  return await this.knex("event_participant")
+    .join("users", "users.id", "event_participant.user_id")
+    .select("users.firstName")
+    .where({event_id: eventId})
+// .where("event_participant.event_id", eventId)
+
 //list out all users from an event
-    async listEventParticipant(userId, eventId) {
-      console.log("eventID", eventId);
-  
-      return await this.knex("event_participant")
-      .select({
-        user_id: userId,
-        event_id: eventId
-      })
+    // async listEventParticipant(eventId) {
+    //   return await this.knex("event_participant")
+    //   .select(eventId)
+    //   }
     }
 
 
