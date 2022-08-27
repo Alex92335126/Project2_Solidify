@@ -12,7 +12,7 @@ class EventsRouters {
     router.delete("/", this.deleteEvent.bind(this));
     router.post("/add-participant", this.addEventParticipant.bind(this));
     router.delete("/del-participant", this.removeEventParticipant.bind(this));
-    router.get("/:id", this.getEventParticipant.bind(this));
+    router.get("/event/:id", this.getEventParticipant.bind(this));
     return router;
   }
 
@@ -103,24 +103,24 @@ class EventsRouters {
   //list out all users from an event
   async getEventParticipant(req, res) {
     try {
-      const eventParticipant = await this.eventsService.listEventParticipant(eventId);
+      const eventParticipant = await this.eventsService.getParticipant(req.params.id);
       res.json(eventParticipant);
     } catch (error) {
       res.status(500).send(error);
     }
   }
-  // list out all events from an user
-  async getUserEvent(req, res) {
-    console.log("hi from user event");
-    let user = req.user;
-    console.log("userId", user.id);
-    try {
-      const allUsers = await this.eventsService.listAllUser(userId, eventId);
-      res.json(allUsers);
-    } catch (error) {
-      res.status(500).send(error);
-    }
-  }
+  // // list out all events from an user
+  // async getUserEvent(req, res) {
+  //   console.log("hi from user event");
+  //   let user = req.user;
+  //   console.log("userId", user.id);
+  //   try {
+  //     const allUsers = await this.eventsService.listAllUser(userId, eventId);
+  //     res.json(allUsers);
+  //   } catch (error) {
+  //     res.status(500).send(error);
+  //   }
+  // }
 }
 
 module.exports = EventsRouters;

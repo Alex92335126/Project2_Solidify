@@ -35,7 +35,9 @@ module.exports = (passport, bcrypt, knex,bodyParser) => {
     new LocalStrategy(
       { usernameField: "email" }, //dont need to add if using username to login
       async (email, password, done) => {
+        console.log("local login")
         const user = await knex("users").where({ email }).first();
+        console.log("login user", user)
         if (!user) {
           return done(null, false);
         }
