@@ -85,29 +85,13 @@ class EventService {
       event_id: eventId
     })
 }
-
+  //list out all users from an event
 async getParticipant(eventId) {
   return await this.knex("event_participant")
     .join("users", "users.id", "event_participant.user_id")
     .select("users.firstName")
     .where({event_id: eventId})
-// .where("event_participant.event_id", eventId)
-
-//list out all users from an event
-    // async listEventParticipant(eventId) {
-    //   return await this.knex("event_participant")
-    //   .select(eventId)
-    //   }
     }
-
-
-  // update(id, note) {
-  //   return this.knex("notes").update({ content: note }).where({ id });
-  // }
-
-  // remove(id) {
-  //   return this.knex("notes").del().where({ id });
-  // }
 }
 
 module.exports = EventService;

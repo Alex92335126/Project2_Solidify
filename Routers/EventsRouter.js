@@ -109,18 +109,6 @@ class EventsRouters {
       res.status(500).send(error);
     }
   }
-  // // list out all events from an user
-  // async getUserEvent(req, res) {
-  //   console.log("hi from user event");
-  //   let user = req.user;
-  //   console.log("userId", user.id);
-  //   try {
-  //     const allUsers = await this.eventsService.listAllUser(userId, eventId);
-  //     res.json(allUsers);
-  //   } catch (error) {
-  //     res.status(500).send(error);
-  //   }
-  // }
 }
 
 module.exports = EventsRouters;
