@@ -11,4 +11,28 @@
     background-color: dimgray;
 }
 
+.title-header{
+    padding-top: 3rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+.container-xl{
+    padding-top: 5rem;
+}
+
+.footer-container {
+    padding-top: 4rem;
+    padding-left: 14rem;
+    padding-right: 14rem;
+    padding-bottom: 4rem;
+}
+
+hr {
+    position: relative;
+    top: 20px;
+    height: 6px;
+    background: black;
+    margin-bottom: 50px;
+}
 
