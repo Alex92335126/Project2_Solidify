@@ -3,13 +3,13 @@ module.exports = (app, bcrypt, passport, knex) => {
   app.use(passport.session());
 
   passport.serializeUser((user, done) => {
-    console.log("serialize", user);
+    // console.log("serialize", user);
     done(null, user.id);
   });
 
   passport.deserializeUser(async (id, done) => {
     const user = await knex("users").where({ id }).first();
-    console.log("deserialize", id);
+    // console.log("deserialize", id);
 
     if (!user) {
       return done(new Error(`Wrong user id: ${id}`));
