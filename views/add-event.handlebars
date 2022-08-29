@@ -1,0 +1,38 @@
+{{> nav}}
+<div class="container-md text-center mt-3">
+    <div class="row my-5">
+        {{!-- <div class="col my-5" style="background-color:blue"> --}}
+            <div class="col-md-6 py-5">
+                <div class="card card-body">
+                    <h1 class="text-center mb-3">Create an Event</h1>
+                    <form action="/event" method="post">
+                        <div class="form-group mb-3">
+                            <label for="eventName">Event Name</label>
+                            <input type="text" id="eventName" name="eventName" class="form-control"
+                                placeholder="Enter Event Name" />
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="eventStart">Start Date</label>
+                            <input type="date" id="eventStart" name="eventStart" class="form-control"
+                                placeholder="Enter Event Start Date" />
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="description">Event Description</label>
+                            <input type="text" id="description" name="description" class="form-control"
+                                placeholder="Enter Event Description" />
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="eventType">Event Type</label>
+                            <input type="text" id="eventType" name="eventType" class="form-control"
+                                placeholder="Enter Event Type" />
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block mb-3">Add Event</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col">
+                <img src="/images/background.webp" class="img-fluid" width="1000" height="600%" />
+            </div>
+        </div>
+    </div>
+    {{> footer}}
