@@ -42,6 +42,7 @@ app.use(
     })
   );
 
+
 setupPassport(app, bcrypt, passport, knex);
 app.use("/", new AuthRouter(express, passport).router());
 

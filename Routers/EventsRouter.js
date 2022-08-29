@@ -37,11 +37,10 @@ class EventsRouters {
         req.body.eventStart,
         req.body.description,
         user.id,
-        req.body.createdDate,
         req.body.modifiedDate,
         req.body.eventType
       );
-      res.json(updateEvent);
+      res.redirect('/');
     } catch (error) {
       res.status(500).send(error);
     }

@@ -36,6 +36,12 @@ class AuthRouter {
       });
     });
 
+    router.get("/add-event", this.isLogged, (req, res) => {
+      res.render("add-event", {
+        title: "Add Event",
+      });
+    });
+
     router.get("/signup", this.isNotLogged, (req, res) => {
       res.render("signup", {
         title: "Sign Up Now",

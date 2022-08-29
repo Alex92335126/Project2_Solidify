@@ -18,7 +18,6 @@ class EventService {
     eventStart,
     description,
     creator,
-    createdDate,
     modifiedDate,
     eventType
   ) {
@@ -27,7 +26,7 @@ class EventService {
       event_start: eventStart,
       description,
       creator,
-      created_date: createdDate,
+      created_date: new Date(),
       modified_date: modifiedDate,
       event_type: eventType,
       is_active: "true",
