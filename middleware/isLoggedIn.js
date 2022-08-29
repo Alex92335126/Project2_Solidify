@@ -1,8 +1,14 @@
 // const express = require('express')
 
 function isLoggedIn(req, res, next) {
+  console.log('hi middleware')
+  console.log(req.originalUrl)
+  console.log(req.originalUrl === "/event" && req.method === "GET" )
+    if(req.originalUrl === "/event" && req.method === "GET") {
+      return next()
+    }
     if (req.isAuthenticated()) {
-      console.log("middleware", req.user)
+      // console.log("middleware", req.user)
       res.locals.user = req.user
       return next();
     }

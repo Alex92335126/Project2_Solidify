@@ -6,7 +6,7 @@ class AuthRouter {
 
   isLogged(req, res, next) {
     if (req.isAuthenticated()) {
-      console.log("middleware", req.user)
+      // console.log("middleware", req.user)
       res.locals.user = req.user
       return next();
     }

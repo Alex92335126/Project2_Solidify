@@ -1,3 +1,5 @@
+const isLoggedIn = require('../middleware/isLoggedIn')
+
 class EventsRouters {
   constructor(eventsService, express) {
     this.eventsService = eventsService;
