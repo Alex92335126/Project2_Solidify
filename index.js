@@ -21,7 +21,7 @@ require("dotenv").config();
 const port = 3000;
 
 const setupPassport = require("./passport");
-const AuthRouter = require("./Routers/passport-router");
+const AuthRouter = require("./Routers/AuthRouter");
 const isLoggedIn = require('./middleware/isLoggedIn')
 
 const app = express();
