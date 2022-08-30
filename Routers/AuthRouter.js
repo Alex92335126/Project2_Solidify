@@ -42,6 +42,7 @@ class AuthRouter {
   //Add Event Page 
     router.get("/add-event", this.isLogged, (req, res) => {
       res.render("add-event", {
+        user: req.user.firstName,
         title: "Add Event",
         logged: req.isAuthenticated()
       });
