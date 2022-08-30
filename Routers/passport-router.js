@@ -33,7 +33,9 @@ class AuthRouter {
     let router = this.express.Router();
 
     router.get("/", (req, res) => {
+      console.log("isLogged",req.isAuthenticated())
       res.render("home", {
+       logged: req.isAuthenticated(),
         title: "Home Page",
       });
     });
@@ -41,24 +43,28 @@ class AuthRouter {
     router.get("/add-event", this.isLogged, (req, res) => {
       res.render("add-event", {
         title: "Add Event",
+        logged: req.isAuthenticated()
       });
     });
   //Calendar Page 
     router.get("/calendar", this.isLogged, (req, res) => {
       res.render("calendar", {
         title: "Calendar",
+        logged: req.isAuthenticated(),
       });
     });
   //Sign Up Pate 
     router.get("/signup", this.isNotLogged, (req, res) => {
       res.render("signup", {
         title: "Sign Up Now",
+        logged: req.isAuthenticated(),
       });
     });
   //Log In Page 
     router.get("/login", this.isNotLogged, (req, res) => {
       res.render("login", {
         title: "Login Page",
+        logged: req.isAuthenticated(),
       });
     });
 
