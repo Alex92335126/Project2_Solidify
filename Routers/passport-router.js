@@ -26,7 +26,9 @@ class AuthRouter {
     }
     res.redirect("/admin")
   }
-
+  
+  // Handlebars Router  
+  // Homepage
   router() {
     let router = this.express.Router();
 
@@ -35,24 +37,31 @@ class AuthRouter {
         title: "Home Page",
       });
     });
-
+  //Add Event Page 
     router.get("/add-event", this.isLogged, (req, res) => {
       res.render("add-event", {
         title: "Add Event",
       });
     });
-
+  //Calendar Page 
+    router.get("/calendar", this.isLogged, (req, res) => {
+      res.render("calendar", {
+        title: "Calendar",
+      });
+    });
+  //Sign Up Pate 
     router.get("/signup", this.isNotLogged, (req, res) => {
       res.render("signup", {
         title: "Sign Up Now",
       });
     });
-
+  //Log In Page 
     router.get("/login", this.isNotLogged, (req, res) => {
       res.render("login", {
         title: "Login Page",
       });
     });
+
 
     router.get(
       "/auth/facebook",
