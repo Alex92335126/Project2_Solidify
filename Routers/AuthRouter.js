@@ -54,6 +54,13 @@ class AuthRouter {
         logged: req.isAuthenticated(),
       });
     });
+  //Calendar Page 2//
+    router.get("/calendar2", (req, res) => {
+      res.render("calendar2", {
+        title: "Calendar2",
+        logged: req.isAuthenticated(),
+      });
+    });
   //Sign Up Pate 
     router.get("/signup", this.isNotLogged, (req, res) => {
       res.render("signup", {
