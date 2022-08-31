@@ -17,12 +17,11 @@ exports.up = async function (knex) {
   await knex.schema.createTable("event", (table) => {
     table.increments();
     table.string("event_name");
-    table.string("event_start");
+    table.date("event_start");
     table.string("description");
     table.integer("creator").unsigned();
     table.foreign("creator").references("users.id");
-    table.string("created_date");
-    table.string("modified_date");
+    table.date("created_date");
     table.string("event_type");
     table.boolean("is_active");
     table.timestamps(false, true);

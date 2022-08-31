@@ -14,7 +14,7 @@ class EventsRouters {
     router.delete("/", this.deleteEvent.bind(this));
     router.post("/add-participant", this.addEventParticipant.bind(this));
     router.delete("/del-participant", this.removeEventParticipant.bind(this));
-    router.get("/event/:id", this.getEventParticipant.bind(this));
+    router.get("/:id", this.getEventParticipant.bind(this));
     return router;
   }
 
@@ -31,13 +31,13 @@ class EventsRouters {
   // post add event
   async addEvent(req, res) {
     let user = req.user;
+    console.log('post event',req.body)
     try {
       const updateEvent = await this.eventsService.addEvent(
         req.body.eventName,
         req.body.eventStart,
         req.body.description,
         user.id,
-        req.body.modifiedDate,
         req.body.eventType
       );
       res.redirect('/');
@@ -103,7 +103,9 @@ class EventsRouters {
 
   //list out all users from an event
   async getEventParticipant(req, res) {
+    console.log('hi event ppl')
     try {
+      console.log('event ppl id', req.params.id)
       const eventParticipant = await this.eventsService.getParticipant(req.params.id);
       res.json(eventParticipant);
     } catch (error) {

@@ -7,7 +7,7 @@ class EventService {
   async list() {
     console.log("listevent");
 
-    const event = await this.knex("event").select("*");
+    const event = await this.knex("event").select("*").orderBy("event_start");
 
     console.log("events service", event);
     return event;
@@ -18,16 +18,14 @@ class EventService {
     eventStart,
     description,
     creator,
-    modifiedDate,
     eventType
   ) {
-    return this.knex("event").insert({
+    return await this.knex("event").insert({
       event_name: eventName,
       event_start: eventStart,
       description,
       creator,
       created_date: new Date(),
-      modified_date: modifiedDate,
       event_type: eventType,
       is_active: "true",
     });

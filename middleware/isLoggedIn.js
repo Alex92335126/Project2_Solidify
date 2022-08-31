@@ -5,10 +5,11 @@ function isLoggedIn(req, res, next) {
   console.log(req.originalUrl)
   console.log(req.originalUrl === "/event" && req.method === "GET" )
     if(req.originalUrl === "/event" && req.method === "GET") {
+      console.log('no authen')
       return next()
     }
     if (req.isAuthenticated()) {
-      // console.log("middleware", req.user)
+      console.log("middleware authenticated", req.user)
       res.locals.user = req.user
       return next();
     }

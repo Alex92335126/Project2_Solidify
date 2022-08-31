@@ -89,14 +89,14 @@ class AuthRouter {
     router.get(
       "/auth/facebook/callback",
       this.passport.authenticate("facebook", {
-        successRedirect: "/",
+        successRedirect: "/calendar",
         failureRedirect: "/login",
       })
     );
     router.get(
       "/auth/google/callback",
       this.passport.authenticate("google", {
-        successRedirect: "/",
+        successRedirect: "/calendar",
         failureRedirect: "/login",
       })
     );
@@ -115,7 +115,7 @@ class AuthRouter {
       "/login",
       this.isNotLogged,
       this.passport.authenticate("local-login", {
-        successRedirect: "/",
+        successRedirect: "/calendar",
         failureRedirect: "/login",
         failureFlash: true,
       })

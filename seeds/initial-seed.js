@@ -27,11 +27,10 @@ exports.seed = async function(knex) {
   await knex('event').insert([
     {
       event_name: 'basketball', 
-      event_start: '30/8/2022', 
+      event_start: '2022/8/30', 
       description: '3 on 3 basketball', 
       creator: '1', 
-      created_date: '25/8/2022',
-      // modified_date: '',
+      created_date: '2022/9/30',
       event_type: 'sport', 
       is_active: 'true',
     },
