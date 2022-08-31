@@ -32,13 +32,20 @@ class AuthRouter {
 
     router.get("/", (req, res) => {
       res.render("home", {
-       
         title: "Home Page",
       });
     });
 
     router.get("/add-event", this.isLogged, (req, res) => {
       res.render("add-event", {
+        user: req.user.firstName,
+        title: "Add Event",
+      });
+    });
+
+
+    router.get("/calendar", this.isLogged, (req, res) => {
+      res.render("calendar", {
         user: req.user.firstName,
         title: "Add Event",
       });
