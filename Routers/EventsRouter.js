@@ -9,12 +9,14 @@ class EventsRouters {
   router() {
     let router = this.express.Router();
     router.get("/", this.getAll.bind(this));
+    router.get("/my-event", this.getMyEvent.bind(this));
+    router.get("/all", this.getAllEventWithPeople.bind(this));
     router.post("/", this.addEvent.bind(this));
     router.put("/", this.putEvent.bind(this));
-    router.delete("/", this.deleteEvent.bind(this));
+    router.delete("/del-event/:eventId", this.deleteEvent.bind(this));
     router.post("/add-participant", this.addEventParticipant.bind(this));
-    router.delete("/del-participant", this.removeEventParticipant.bind(this));
-    router.get("/:id", this.getEventParticipant.bind(this));
+    router.delete("/del-participant/:eventId", this.removeEventParticipant.bind(this));
+    router.get("/participant/:id", this.getEventParticipant.bind(this));
     return router;
   }
 
@@ -27,6 +29,21 @@ class EventsRouters {
       res.status(500).send(error);
     }
   }
+
+  async getAllEventWithPeople(req,res) {
+    try {
+      const allEventsWithPeople = await this.eventsService.listEventWithPeople(req.user);
+      let object = {
+        userId: req.user.id,
+        eventList: allEventsWithPeople
+      }
+      res.json(object);
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  }
+
+
 
   // post add event
   async addEvent(req, res) {
@@ -70,8 +87,9 @@ class EventsRouters {
 
   async deleteEvent (req, res) {
     let user = req.user;
+    console.log("del event", user)
     try{
-      const delEvent = await this.eventsService.removeEvent(req.body.eventId);
+      const delEvent = await this.eventsService.removeEvent(user.id, req.params.eventId);
       res.json(delEvent);
     } catch (error) {
       res.status(500).send(error);
@@ -92,9 +110,10 @@ class EventsRouters {
 
   // if user joined an event and remove user to a event (Decline button)
   async removeEventParticipant (req, res) { 
+    console.log("body", req.params.eventId)
     let user = req.user;
     try{
-      const delParticipant = await this.eventsService.delParticipant(user.id, req.body.eventId);
+      const delParticipant = await this.eventsService.delParticipant(user.id, req.params.eventId);
       res.json(delParticipant);
     } catch (error) {
       res.status(500).send(error);
@@ -107,10 +126,36 @@ class EventsRouters {
     try {
       console.log('event ppl id', req.params.id)
       const eventParticipant = await this.eventsService.getParticipant(req.params.id);
-      res.json(eventParticipant);
+      let object = {
+        participant: eventParticipant,
+        joined: false,
+        userId: req.user.id
+      }
+      
+      for (let i=0; i<eventParticipant.length; i++) {
+        if (req.user.id === eventParticipant[i].id) {
+          object.joined = true;
+          break;
+        }
+        }
+        res.json(object);
+
     } catch (error) {
       res.status(500).send(error);
     }
+  }
+
+  async getMyEvent(req, res) {
+    console.log('helllo get my event')
+    let user = req.user
+    try {
+      const myEvent = await this.eventsService.getUserEvent(user.id)
+      console.log('my event', myEvent)
+      res.json(myEvent)
+    } catch (error) {
+      res.status(500).send(error);
+    }
+
   }
 }
 

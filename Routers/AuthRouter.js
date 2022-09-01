@@ -52,6 +52,7 @@ class AuthRouter {
       res.render("calendar", {
         title: "Calendar",
         logged: req.isAuthenticated(),
+        user: req.user.firstName,
       });
     });
   //Sign Up Pate 
@@ -105,7 +106,7 @@ class AuthRouter {
       "/signup",
       this.isNotLogged,
       this.passport.authenticate("local-signup", {
-        successRedirect: "/login",
+        successRedirect: "/calendar",
         failureRedirect: "/signup",
         failureFlash: true,
       })

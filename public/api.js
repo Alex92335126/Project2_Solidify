@@ -14,8 +14,8 @@ const options = {
   },
   calendars: [
     {
-      id: 'cal1',
-      name: 'Personal',
+      id: '2',
+      name: 'JW Buffet',
       backgroundColor: '#03bd9e',
     },
     {
@@ -27,6 +27,15 @@ const options = {
 };
 
 const calendar = new Calendar(container, options);
+// calendar.createEvents([
+//   {
+//     id: '2',
+//     calendarId: '2',
+//     title: 'JW Buffet',
+//     start: '2022-09-09T16:00:00.000Z',
+//     end: '2022-09-09T16:00:00.000Z',
+//   },
+// ]);
 
 function showEvent() {
     if (eventList.style.display == "none") {
@@ -48,7 +57,7 @@ async function getData () {
                 <div class="text-capitalize">${"Event Name: "+item.event_name}</div>
                 <div>${"Description: " + item.description}</div>
                 <div>${"Event Type: " + item.event_type}</div>
-                <div>${"Event Start: " + item.event_start}</div>
+                <div>${"Event Start: " + dayjs(item.event_start).format('DD/MM/YYYY')}</div>
                 <hr>
             </div>
         `
