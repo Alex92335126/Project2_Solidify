@@ -39,3 +39,9 @@ hr {
 .event-data {
     margin-top: 2rem;
 }
+
+.container{
+    width:800px;
+    height:500px;
+    position: absolute;
+}
