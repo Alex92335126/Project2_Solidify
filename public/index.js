@@ -1,5 +1,9 @@
-document.addEventListener("DOMContentLoaded", function () {
+
+
+document.addEventListener("DOMContentLoaded", async function () {
   var calendarEl = document.getElementById("calendar");
+  let response = await axios("/event")
+  console.log(response.data)
   var calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: "dayGridMonth",
     navLinks: true,
@@ -10,9 +14,9 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     events: [
       {
-        title: "hello testing", //eventName//
-        start: "2022-08-29", //event_start//
-        end: "2022-08-30",
+        title: response.data[0].event_name, //eventName//
+        start: "2022-08-30", //event_start//
+        end: "2022-08-31",
       },
     ],
     customButtons: {
@@ -41,3 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   calendar.render();
 });
+
+
+
+
