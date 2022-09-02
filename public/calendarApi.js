@@ -59,8 +59,8 @@ let joined = false;
                     </div>
                     <div class="col-md-3 col-md-3 d-flex justify-content-center align-items-center">
                   ${delEventBtn}        
-                    </div>
-                    <hr>
+                  </div>
+                  <hr>ß
                 </div>
                 <div>
                     <div id="event-participant-${item.id}"></div>
